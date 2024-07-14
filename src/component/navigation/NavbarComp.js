@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import {Navbar, Nav, Container} from 'react-bootstrap'
+=======
+import {Navbar, Nav, NavDropdown, Container} from 'react-bootstrap'
+>>>>>>> week4/main
 
 import {
     BrowserRouter as Router,
@@ -9,8 +13,11 @@ import {
 } from "react-router-dom"
 import About from "../../pages/About";
 import Home from "../../pages/Home";
+<<<<<<< HEAD
 import TodoListAll from "../../pages/TodoListAll";
 import SearchPage from "../../pages/SearchPage";
+=======
+>>>>>>> week4/main
 
 export default class NavbarComp extends Component {
     render() {
@@ -25,8 +32,11 @@ export default class NavbarComp extends Component {
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to={"/"}> Home </Nav.Link>
                         <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
+<<<<<<< HEAD
                         <Nav.Link as={Link} to={"/TodoListAll"}>TodoPage</Nav.Link>
                         <Nav.Link as={Link} to={"/SearchPage"}>SearchPage</Nav.Link>
+=======
+>>>>>>> week4/main
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -36,8 +46,11 @@ export default class NavbarComp extends Component {
                 <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/about" element={<About/>}/>
+<<<<<<< HEAD
                 <Route exact path="/TodoListAll" element={<TodoListAll/>}/>
                 <Route exact path="/SearchPage" element={<SearchPage/>}/>
+=======
+>>>>>>> week4/main
                 </Routes>
             </div>
             </Router>
