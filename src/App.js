@@ -6,7 +6,7 @@ import NavbarComp from './component/navigation/NavbarComp';
 function App() {
   return (
     <div className="App">
-      <NavbarComp/>
+      <NavbarComp />
     </div>
   );
 }

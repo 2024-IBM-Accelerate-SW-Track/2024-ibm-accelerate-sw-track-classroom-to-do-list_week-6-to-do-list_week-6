@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Button, TextField } from "@mui/material";
-import { DesktopDatePicker , LocalizationProvider} from '@mui/x-date-pickers';
+import { DesktopDatePicker , LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import Axios from "axios";
+const axios = require("axios");
+
+
+
 
 class AddTodo extends Component {
   state = {
@@ -19,27 +22,24 @@ class AddTodo extends Component {
   };
   
   handleTimeChange = (e) => {
-    let dueDate = new Date(e).toLocaleDateString()
+    let dueDate = new Date(e).toLocaleDateString();
     this.setState({
       due: dueDate,
     });
   };
 
-
   handleSubmit = (e) => {
     e.preventDefault();
-    // JSON object to be sent as body of request
     const jsonObject = {
       task: this.state.content,
       currentDate: this.state.date,
       dueDate: this.state.due
     };
   
-    // HTTP Client to send a POST request
-    Axios({
+    axios({
       method: "POST",
       url: "http://localhost:8080/add/item",
-      data: {jsonObject},
+      data: { jsonObject },
       headers: {
         "Content-Type": "application/json"
       }
@@ -78,7 +78,7 @@ class AddTodo extends Component {
           <Button
             id="new-item-button"
             name='submit'
-            style={{ marginLeft: "10px",marginTop:10 }}
+            style={{ marginLeft: "10px", marginTop: 10 }}
             onClick={this.handleSubmit}
             variant="contained"
             color="primary"

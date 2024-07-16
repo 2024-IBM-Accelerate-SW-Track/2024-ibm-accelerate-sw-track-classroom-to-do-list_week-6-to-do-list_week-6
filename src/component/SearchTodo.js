@@ -1,52 +1,56 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import Axios from "axios";
+const axios = require("axios");
 
-class SearchTodo extends Component {
-  
-  state = {
-    tmpdata: [],
+
+
+
+const SearchTodo = () => {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
   };
 
-  handleChange = (e) => {
-    this.setState({
-      content: e.target.value,
-      date: Date().toLocaleString('en-US'),
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:8080/get/searchitem?q=${query}`);
+      setResults(response.data);
+    } catch (error) {
+      console.error("Error searching items", error);
+    }
   };
-  
 
-  handleSubmit = (e) => {
-    //Begin Here
-
-  };
-  
-  render() {
-    return (
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Search for ToDo Item"
+          variant="outlined"
+          onChange={handleChange}
+          value={query}
+        />
+        <Button
+          style={{ marginLeft: "10px", marginTop: 10 }}
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Search
+        </Button>
+      </form>
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <TextField
-            id="search-item-input"
-            label="Search for ToDo Item"
-            variant="outlined"
-            onChange={this.handleChange}
-            value={this.state.value}
-          /> 
-          <Button
-            id="search-item-button"
-            name='submit'
-            style={{ marginLeft: "10px",marginTop:10 }}
-            onClick={this.handleSubmit}
-            variant="contained"
-            color="primary"
-          >
-            Search
-          </Button>
-        </form>
-        <div>{this.state.tmpdata}</div>
+        {results.map((result, index) => (
+          <div key={index}>
+            <h3>{result.Task}</h3>
+            <p>{result.Current_date} - {result.Due_date}</p>
+          </div>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default SearchTodo;
